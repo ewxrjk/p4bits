@@ -15,7 +15,7 @@ binary-p4bits: build
 	$(MKDIR) debian/p4bits/DEBIAN
 	$(MKDIR) debian/p4bits/usr/share/doc/p4bits
 	$(MKDIR) debian/p4bits/etc/init.d
-	$(INSTALL_DATA) debian/copyright debian/changelog debian/README \
+	$(INSTALL_DATA) debian/copyright debian/changelog README \
 		debian/p4bits/usr/share/doc/p4bits
 	gzip -9f debian/p4bits/usr/share/doc/p4bits/README
 	gzip -9f debian/p4bits/usr/share/doc/p4bits/changelog

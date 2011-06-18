@@ -1,6 +1,0 @@
-This script provides an init script for the commercial Perforce
-server.  It is only any use if you have p4d already.
-
-The script assumes you keep your Perforce depot in /var/lib/p4.
-
-See http://www.perforce.com/ for more information about Perforce.
