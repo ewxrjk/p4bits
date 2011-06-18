@@ -12,6 +12,10 @@
 
 set -e
 
+if [ -e /etc/default/p4 ]; then
+  . /etc/default/p4
+fi
+
 ROOT=${ROOT:-/var/lib/p4}
 SERVER=${SERVER:-/usr/local/bin/p4d}
 
