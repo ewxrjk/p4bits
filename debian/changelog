@@ -1,0 +1,12 @@
+p4bits (0.1) unstable; urgency=low
+
+  * Correct command in LSB comments.
+
+ -- Richard Kettlewell <rjk@greenend.org.uk>  Sat, 18 Jun 2011 10:56:08 +0100
+
+p4bits (0.0) unstable; urgency=low
+
+  * Initial Debianized version.
+
+ -- Richard Kettlewell <rjk@greenend.org.uk>  Fri, 10 Apr 2009 11:46:02 +0100
+

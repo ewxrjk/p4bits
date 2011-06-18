@@ -1,0 +1,8 @@
+#! /bin/sh
+set -e
+
+case "$1" in
+upgrade )
+  invoke-rc.d p4 stop
+  ;;
+esac

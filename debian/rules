@@ -1,0 +1,39 @@
+#! /usr/bin/make -f
+
+# Install commands.  You wouldn't normally override these.
+INSTALL=install
+INSTALL_DATA=$(INSTALL) -p -o root -g root -m 644
+INSTALL_PROGRAM=$(INSTALL) -p -o root -g root -m 755
+INSTALL_SCRIPT=$(INSTALL) -p -o root -g root -m 755
+MKDIR=mkdir -p -m 755
+
+build:
+
+binary: binary-p4bits
+binary-p4bits: build
+	rm -rf debian/p4bits
+	$(MKDIR) debian/p4bits/DEBIAN
+	$(MKDIR) debian/p4bits/usr/share/doc/p4bits
+	$(MKDIR) debian/p4bits/etc/init.d
+	$(INSTALL_DATA) debian/copyright debian/changelog debian/README \
+		debian/p4bits/usr/share/doc/p4bits
+	gzip -9f debian/p4bits/usr/share/doc/p4bits/README
+	gzip -9f debian/p4bits/usr/share/doc/p4bits/changelog
+	$(INSTALL_SCRIPT) p4.init debian/p4bits/etc/init.d/p4
+	$(INSTALL_DATA) debian/conffiles debian/p4bits/DEBIAN
+	$(INSTALL_SCRIPT) debian/postinst debian/prerm debian/postrm \
+		debian/p4bits/DEBIAN
+	cd debian/p4bits && \
+		find -name DEBIAN -prune -o -type f -print \
+			| sed 's/^\.\///' \
+			| xargs md5sum > DEBIAN/md5sums
+	dpkg-gencontrol -isp -pp4bits -Pdebian/p4bits -Tdebian/substvars.p4bits
+	chown -R root:root debian/p4bits
+	chmod -R g-ws debian/p4bits
+	dpkg --build debian/p4bits ..
+
+clean:
+	rm -f debian/files
+	rm -f debian/substvars.*
+	rm -rf debian/p4bits
+

@@ -1,0 +1,31 @@
+#! /bin/sh
+set -e
+
+add_p4_user() {
+  echo "Creating p4d user and group"
+  adduser --quiet --system --group --shell /bin/sh --home /var/lib/p4 \
+    --no-create-home p4d
+}
+
+case "$1" in
+configure )
+  if grep -q ^p4d: /etc/passwd; then
+    :
+  else
+    add_p4_user
+  fi
+  if test ! -d /var/lib/p4; then
+    echo "Creating /var/lib/p4"
+    mkdir -m 700 /var/lib/p4
+    chown p4d:p4d /var/lib/p4
+  fi
+  update-rc.d p4 defaults 92 19 > /dev/null
+  invoke-rc.d p4 restart
+  ;;
+abort-upgrade )
+  invoke-rc.d p4 restart
+  ;;
+reconfigure )
+  invoke-rc.d p4 restart
+  ;;
+esac

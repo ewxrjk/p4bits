@@ -1,0 +1,17 @@
+Source: p4bits
+Maintainer: Richard Kettlewell <rjk@greenend.org.uk>
+Section: devel
+Priority: extra
+Standards-Version: 3.8.1.0
+
+Package: p4bits
+Architecture: all
+Section: devel
+Priority: extra
+Depends: ${shlibs:Depends},adduser
+Description: Init scripts for Perforce
+ This package provides init scripts for the Perforce version control
+ system.
+ .
+ You should install p4d in /usr/local/bin first.  Without it this
+ package is useless.

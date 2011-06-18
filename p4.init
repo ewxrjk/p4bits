@@ -1,0 +1,42 @@
+#! /bin/bash
+
+### BEGIN INIT INFO
+# Provides:          p4d
+# Required-Start:    $local_fs $network $named $remote_fs $time
+# Required-Stop:     $local_fs $network $named $remote_fs $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start and stop Perforce
+# Description:       Perforce is a proprietary revision control system.
+### END INIT INFO
+
+set -e
+
+ROOT=${ROOT:-/var/lib/p4}
+SERVER=${SERVER:-/usr/local/bin/p4d}
+
+stop() {
+  printf "Stopping Perforce server: "
+  start-stop-daemon -K -q -o -x ${SERVER}
+  echo done
+}
+
+start() {
+  printf "Starting Perforce server: "
+  start-stop-daemon -S -q -b -d ${ROOT} -c p4d -x ${SERVER}
+  echo done
+}
+
+case "$1" in
+start | stop )
+  $1
+  ;;
+restart | force-reload )
+  stop
+  start
+  ;;
+* )
+  echo "Usage: $0 stop|start|restart|force-restart" >&2
+  exit 1
+  ;;
+esac
