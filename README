@@ -2,6 +2,10 @@ This script provides Debian systems with an init script for the
 commercial Perforce server.  It is only any use if you have p4d
 already.
 
+The recommended way to build and install it is:
+  $ dpkg-buildpackage -uc -us
+  $ sudo dpkg -i ../p4bits_0.2_all.deb
+
 By default the script assumes you keep your Perforce depot in
 /var/lib/p4 and the p4d executable in /usr/local/bin.  However you can
 reconfigure either by creating /etc/default/p4 and setting ROOT and
