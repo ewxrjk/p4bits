@@ -1,5 +1,5 @@
 #! /usr/bin/make -f
-# Copyright (c) 2009, 2011 Richard Kettlewell.
+# Copyright (c) 2009, 2011, 2015 Richard Kettlewell.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,8 +32,8 @@ binary-p4bits: build
 	$(MKDIR) debian/p4bits/etc/init.d
 	$(INSTALL_DATA) debian/copyright debian/changelog README \
 		debian/p4bits/usr/share/doc/p4bits
-	gzip -9f debian/p4bits/usr/share/doc/p4bits/README
-	gzip -9f debian/p4bits/usr/share/doc/p4bits/changelog
+	gzip -9nf debian/p4bits/usr/share/doc/p4bits/README
+	gzip -9nf debian/p4bits/usr/share/doc/p4bits/changelog
 	$(INSTALL_SCRIPT) p4.init debian/p4bits/etc/init.d/p4
 	$(INSTALL_DATA) debian/conffiles debian/p4bits/DEBIAN
 	$(INSTALL_SCRIPT) debian/postinst debian/prerm debian/postrm \
